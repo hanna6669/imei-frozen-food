@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I-Mei（M）SDN BHD | IMEI冷冻食品公司</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background-color: #d2d3d3;
+            color: #000000;
+        }
+        
+        /* 导航栏 */
+        header {
+            background-color: #000000;
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        nav ul li {
+            margin-left: 2rem;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        nav ul li a:hover {
+            color: #12b3f3;
+        }
+        
+        /* 主页横幅 */
+        .hero {
+  background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%),
+              url('https://i.ibb.co/39wZWRWj/800-x-800-A2-2.png') no-repeat center/cover;
+  height: 80vh;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  overflow: hidden; /* 隐藏溢出部分 */
+}
+
+/* 内容容器 */
+.hero-content {
+  max-width: 1200px;
+  padding: 0 20px;
+  z-index: 2;
+}
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            background-color: #000000;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #000000;
+        }
+        
+        /* 产品展示 */
+        .products {
+            padding: 4rem 5%;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 1.5rem;
+        }
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+        }
+        .product-info p {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+        .price {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.2rem;
+        }
+        
+        /* 联系表单 */
+        .contact {
+            background-color: #ecf0f1;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #000000;
+            color: white;
+            text-align: center;
+            padding: 2rem 5%;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .footer-links a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .about-section {
+  background-color: #f9f9f9;
+  padding: 4rem 5%;
+  text-align: center;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.about-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.about-card .icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.team-section {
+  margin-top: 4rem;
+}
+
+.team-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.team-member {
+  text-align: center;
+}
+
+.team-member img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.team-member h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.team-member p {
+  font-size: 1rem;
+  color: #7f8c8d;
+}
+
+.map-container {
+  margin: 3rem auto;
+  max-width: 1000px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 400px;
+  display: block;
+}
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="logo">I-Mei（M） SDN BHD</div>
+        <nav>
+            <ul>
+                <li><a href="#home">首页</a></li>
+                <li><a href="#products">产品</a></li>
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- 主页横幅 -->
+    <section class="hero" id="home">
+        <h1>槟城优质冷冻食品供应商<br>
+        
+        <p>批发零售各类冷冻速食食品  ·  Halal认证  ·  目前仅限槟岛内配送<br>
+        <p>我们提供多种优质冷冻食品，满足您的需求。</p>
+        <a href="#products" class="btn">查看产品</a>
+    </section>
+    
+    <!-- 产品展示 -->
+    <section class="products" id="products">
+        <h2 class="section-title">热门产品</h2>
+        <div class="product-grid">
+            <!-- 产品1 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1606755456206-b25206b30b98?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="火锅丸子">
+                </div>
+                <div class="product-info">
+                    <h3>火锅丸子组合</h3>
+                    <p>鱼丸、蟹棒、牛肉丸混合装</p>
+                    <p class="price">RM15/kg</p>
+                    <a href="#contact" class="btn">询价</a>
+                </div>
+            </div>
+            
+            <!-- 产品2 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://i.ibb.co/QjNRM61b/3.png"  > 
+                </div>
+                <div class="product-info">
+                    <h3>IMEI Tempura Chicken Nuggets </h3>
+                    <p>Halal认证 · 快餐厅同款</p>
+                    <p class="price">RM14.9/800g</p>
+                    <a href="#contact" class="btn">询价</a>
+                </div>
+            </div>
+            
+            <!-- 产品3 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="薯条">
+                </div>
+                <div class="product-info">
+                    <h3>冷冻薯条</h3>
+                    <p>金黄酥脆 ·  </p>
+                    <p class="price">RM8/kg</p>
+                    <a href="#contact" class="btn">询价</a>
+                </div>
+            </div>
+            
+            <!-- 产品4 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="冰淇淋">
+                </div>
+                <div class="product-info">
+                    <h3>IMEI ICE CREAM </h3>
+                    <p>多种口味 · 4盒起订</p>
+                    <p class="price">RMxx/box</p>
+                    <a href="#contact" class="btn">询价</a>
+                </div>
+            </div>
+
+             <!-- 产品5 -->
+             <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="冰淇淋">
+                </div>
+                <div class="product-info">
+                    <h3>IMEI </h3>
+                    <p>多种口味 · 4盒起订</p>
+                    <p class="price">RMxx/box</p>
+                    <a href="#contact" class="btn">询价</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <h2 class="section-title">关于 I-Mei</h2>
+        
+        <div class="about-grid">
+          <!-- 公司简介 -->
+          <div class="about-card">
+            <div class="icon">🏭</div>
+            <h3>我们的故事</h3>
+            <p>自2010年成立以来，I-Mei 始终致力于为槟城地区提供最优质的冷冻食品。从最初的小型冷库发展到如今的全自动冷链配送中心，我们坚持"新鲜速达"的服务理念。</p>
+          </div>
+    
+          <!-- 核心优势 -->
+          <div class="about-card">
+            <div class="icon">❄️</div>
+            <h3>冷链技术</h3>
+            <p>采用-18℃全程冷链系统，配备温度监控GPS运输车，确保从仓库到您手中的每一件产品都保持最佳状态。</p>
+          </div>
+    
+          <!-- 认证信息 -->
+          <div class="about-card">
+            <div class="icon"></div>
+            <h3>Halal认证</h3>
+            <p>所有产品均通过JAKIM清真认证（认证编号：JAKIM/2023/12345），生产过程符合伊斯兰教规。</p>
+          </div>
+        </div>
+    </section>
+    
+    <!-- 联系表单 -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">联系我们</h2>
+        <div class="contact-form">
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">邮箱</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">电话</label>
+                    <input type="tel" id="phone">
+                </div>
+                <div class="form-group">
+                    <label for="business">业务类型</label>
+                    <select id="business">
+                        <option value="wholesale">批发采购</option>
+                        <option value="retail">零售采购</option>
+                        <option value="other">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">留言</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                <button type="submit" class="btn">提交询价</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 地图 -->
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.09751343892!2d100.32203507494319!3d5.4021133351780515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304ac371c913d507%3A0x8289861eaf83340!2si-mei%20(malaysia)%20sdn%20bhd!5e0!3m2!1sen!2smy!4v1744623021416!5m2!1sen!2smy" 
+        width="600" 
+        height="450" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-links">
+            <a href="#home">首页</a>
+            <a href="#products">产品</a>
+            <a href="#about">关于我们</a>
+            <a href="#contact">联系我们</a>
+        </div>
+        <p>© 2023 I-Mei（M） SDN BHD . 版权所有</p>
+        <br>
+        <p>地址: 77, Jalan Jelutong, GEORGETOWN, 11600 George Town, Pulau Pinang, George Town, Malaysia<br>
+           电话: 016-449 2218(OFFICE) / 012-455 2599（MS.CH'NG） </p>
+    </footer>
+    
+    <script>
+        // 表单提交功能
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('感谢您的询价！我们会尽快联系您。');
+            this.reset();
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
